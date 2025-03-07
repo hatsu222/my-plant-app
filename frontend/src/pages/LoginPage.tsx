@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { AxiosError } from "axios";
 
 const LoginPage = () => {
-  const apiUrl = process.env.REACT_APP_API_URL;
+  const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:3000";
 
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");

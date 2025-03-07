@@ -13,7 +13,7 @@ import MyPagePlantList from "../components/MyPagePlantList";
 import { useNavigate } from "react-router-dom";
 
 const MyPage = () => {
-  const apiUrl = process.env.REACT_APP_API_URL;
+  const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:3000";
 
   const opacityProps = {
     happa: false,

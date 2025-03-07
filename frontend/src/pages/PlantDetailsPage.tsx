@@ -9,7 +9,7 @@ import PlantFeature from "../components/increasePlantsComponents/PlantFeature";
 import { useLocation } from "react-router-dom";
 
 const PlantDetailsPage = () => {
-  const apiUrl = process.env.REACT_APP_API_URL;
+  const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:3000";
 
   const { plantId } = useParams();
   const [plantDetails, setPlantDetails] = useState<any>(null);

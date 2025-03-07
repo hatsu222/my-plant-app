@@ -17,7 +17,7 @@ interface PlantImgData {
 }
 
 const ImageList = (props?: any) => {
-  const apiUrl = process.env.REACT_APP_API_URL;
+  const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:3000";
 
   const isFavoritePlantPage = props?.favoritePage ? true : false;
   const isWantListPlantPage = props?.wantListPage ? true : false;
