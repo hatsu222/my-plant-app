@@ -19,11 +19,11 @@ import { JwtStrategy } from './auth/jwt.strategy';
   imports: [
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: 'localhost',
-      port: 5432,
-      username: 'postgres',
-      password: 'Tanu0130',
-      database: 'postgres',
+      host: process.env.DB_HOST || 'localhost',
+      port: parseInt(process.env.DB_PORT) || 5432,
+      username: process.env.DB_USERNAME || 'postgres',
+      password: process.env.DB_PASSWORD || 'Tanu0130',
+      database: process.env.DB_DATABASE || 'postgres',
       entities: [User, Plant, Img], // 必要なエンティティを追加
       synchronize: true, // 開発中はtrue、プロダクションではfalseにすることをお勧めします
     }),
