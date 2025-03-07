@@ -27,6 +27,7 @@ const MyPage = () => {
     userName: string;
     myImgBase64Data: string | null;
   } | null>(null);
+  console.log("userInfo", userInfo);
   const [visible, setVisible] = useState<boolean>(false);
   const [logoutVisible, setLogoutVisible] = useState<boolean>(false);
 
@@ -41,6 +42,7 @@ const MyPage = () => {
     const fetchData = async () => {
       try {
         const token = localStorage.getItem("access_token");
+        console.log("token", token);
         const userResponse = await axios.get(`${apiUrl}/users/get-user-info`, {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -142,98 +144,100 @@ const MyPage = () => {
   };
 
   return (
-    <div
-      style={{
-        zIndex: "1",
-        position: "relative",
-        // backgroundImage: `url(${mypage})`,
-        backgroundImage: `url(${mypageBackimg})`,
-      }}
-      className="back-img2"
-    >
-      <Modal
-        visible={visible}
-        centered
-        okText={exitMyImgBase64Data ? "変更" : "追加"}
-        onCancel={handleCancel}
-        onOk={handleOk}
-        okButtonProps={{
-          style: { backgroundColor: "#78A465", color: "white" },
-        }}
+    <div className="myPageContainer">
+      <div
         style={{
-          fontWeight: "bold",
-          width: "300px",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
+          zIndex: "1",
+          position: "relative",
+          // backgroundImage: `url(${mypage})`,
+          backgroundImage: `url(${mypageBackimg})`,
         }}
+        className="back-img2"
       >
-        {exitMyImgBase64Data
-          ? "マイページ画像を変更しますか?"
-          : "マイページ画像を追加しますか?"}
-      </Modal>
-      <Modal
-        visible={logoutVisible}
-        centered
-        okText="ログアウト"
-        cancelText="キャンセル"
-        onCancel={handleCancel}
-        onOk={logout}
-        okButtonProps={{
-          style: { backgroundColor: "#78A465", color: "white" },
-        }}
-        style={{
-          fontWeight: "bold",
-          width: "300px",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        ログアウトしますか?
-      </Modal>
-      <h1 className="pageTitle" style={{ marginTop: "20px" }}>
-        マイページ
-      </h1>
-      <div>
-        <div style={{ width: "100%", height: "160px" }}>
-          <div className="profile-image" onClick={changeMyImgModal}>
-            <img
-              src={
-                exitMyImgBase64Data !== null && !!userInfo?.myImgBase64Data
-                  ? `data:image/jpeg;base64,${userInfo?.myImgBase64Data}`
-                  : men
-              }
-              alt=""
-              style={{
-                color: "red",
-                opacity: exitMyImgBase64Data ? "1" : "0.4",
-                width: exitMyImgBase64Data ? "100%" : "50px",
-                height: exitMyImgBase64Data ? "100%" : "50px",
-                objectFit: exitMyImgBase64Data ? "cover" : "contain",
-              }}
-            />
+        <Modal
+          visible={visible}
+          centered
+          okText={exitMyImgBase64Data ? "変更" : "追加"}
+          onCancel={handleCancel}
+          onOk={handleOk}
+          okButtonProps={{
+            style: { backgroundColor: "#78A465", color: "white" },
+          }}
+          style={{
+            fontWeight: "bold",
+            width: "300px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          {exitMyImgBase64Data
+            ? "マイページ画像を変更しますか?"
+            : "マイページ画像を追加しますか?"}
+        </Modal>
+        <Modal
+          visible={logoutVisible}
+          centered
+          okText="ログアウト"
+          cancelText="キャンセル"
+          onCancel={handleCancel}
+          onOk={logout}
+          okButtonProps={{
+            style: { backgroundColor: "#78A465", color: "white" },
+          }}
+          style={{
+            fontWeight: "bold",
+            width: "300px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          ログアウトしますか?
+        </Modal>
+        <h1 className="pageTitle" style={{ marginTop: "20px" }}>
+          マイページ
+        </h1>
+        <div>
+          <div style={{ width: "100%", height: "160px" }}>
+            <div className="profile-image" onClick={changeMyImgModal}>
+              <img
+                src={
+                  exitMyImgBase64Data !== null && !!userInfo?.myImgBase64Data
+                    ? `data:image/jpeg;base64,${userInfo?.myImgBase64Data}`
+                    : men
+                }
+                alt=""
+                style={{
+                  color: "red",
+                  opacity: exitMyImgBase64Data ? "1" : "0.4",
+                  width: exitMyImgBase64Data ? "100%" : "50px",
+                  height: exitMyImgBase64Data ? "100%" : "50px",
+                  objectFit: exitMyImgBase64Data ? "cover" : "contain",
+                }}
+              />
+            </div>
+            <input
+              type="file"
+              id="my-image-input"
+              style={{ display: "none" }}
+              accept="image/*"
+              onChange={handleMyImageChange}
+            ></input>
           </div>
-          <input
-            type="file"
-            id="my-image-input"
-            style={{ display: "none" }}
-            accept="image/*"
-            onChange={handleMyImageChange}
-          ></input>
-        </div>
-        <div className="mypage-name">{userInfo?.userName}</div>
-        <MyPagePlantInfo
-          totalNumbersOfPlants={totalNumbersOfPlants ?? 0}
-          totalMoney={totalMoney ?? 0}
-        />
-        <MyPagePlantList />
+          <div className="mypage-name">{userInfo?.userName}</div>
+          <MyPagePlantInfo
+            totalNumbersOfPlants={totalNumbersOfPlants ?? 0}
+            totalMoney={totalMoney ?? 0}
+          />
+          <MyPagePlantList />
 
-        <span className="mypage-logout-button" onClick={clickLogOut}>
-          ログアウト
-        </span>
+          <span className="mypage-logout-button" onClick={clickLogOut}>
+            ログアウト
+          </span>
+        </div>
+        <UnderBar {...opacityProps} />
       </div>
-      <UnderBar {...opacityProps} />
     </div>
   );
 };

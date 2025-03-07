@@ -11,18 +11,20 @@ const ListofPlantsPage = () => {
   };
 
   return (
-    <div
-      style={{
-        backgroundImage: `url(${listBackimg})`,
-      }}
-      className="back-img2"
-    >
-      <h1 className="pageTitle" style={{ marginTop: "20px" }}>
-        ぼくの植物たち
-      </h1>
-      <ImageList></ImageList>
+    <div className="listOfPlantsPageContainer">
+      <div
+        style={{
+          backgroundImage: `url(${listBackimg})`,
+        }}
+        className="back-img2"
+      >
+        <h1 className="pageTitle" style={{ marginTop: "20px" }}>
+          ぼくの植物たち
+        </h1>
+        <ImageList></ImageList>
 
-      <UnderBar {...opacityProps} />
+        <UnderBar {...opacityProps} />
+      </div>
     </div>
   );
 };

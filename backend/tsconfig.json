@@ -19,5 +19,5 @@
     "noFallthroughCasesInSwitch": false
   },
   "exclude": ["node_modules"],
-  "include": ["src/**/*"]
+  "include": ["src/**/*", "config/db/ormconfig.ts"]
 }

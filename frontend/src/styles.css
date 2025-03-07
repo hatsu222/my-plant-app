@@ -618,3 +618,13 @@ body {
   border: none;
   margin-top: 30px;
 }
+
+.myPageContainer {
+  overflow: hidden;
+  height: 100vh;
+}
+
+.listOfPlantsPageContainer {
+  overflow: hidden;
+  height: 100vh;
+}

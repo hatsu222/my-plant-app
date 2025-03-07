@@ -18,9 +18,10 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "migration:generate": "typeorm migration:generate -n CreatePlantAndImgTables -d src/data-source.ts",
     "migration:run": "typeorm migration:run",
-    "migration:revert": "typeorm migration:revert"
+    "migration:revert": "typeorm migration:revert",
+    "typeorm": "typeorm-ts-node-commonjs -d ./src/config/db/ormconfig.ts",
+    "migration:generate": "typeorm-ts-node-commonjs migration:generate -d ./config/db/ormconfig.ts src/migrations/createtable"
   },
   "dependencies": {
     "@nestjs/common": "^10.0.0",
@@ -35,8 +36,8 @@
     "concurrently": "^9.1.2",
     "passport": "^0.7.0",
     "passport-jwt": "^4.0.1",
-    "pg": "^8.13.1",
-    "reflect-metadata": "^0.2.0",
+    "pg": "^8.13.3",
+    "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.1"
   },
   "devDependencies": {
@@ -62,7 +63,7 @@
     "ts-loader": "^9.4.3",
     "ts-node": "^10.9.2",
     "tsconfig-paths": "^4.2.0",
-    "typeorm": "^0.3.20",
+    "typeorm": "^0.3.21",
     "typescript": "^5.1.3"
   },
   "jest": {
