@@ -11,7 +11,7 @@ import PlantImg from "./increasePlantsComponents/PlantImg";
 import { useNavigate } from "react-router-dom";
 
 const IncreasePlants = (props?: any) => {
-  const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:3000";
+  const apiUrl = process.env.REACT_APP_API_URL;
 
   const isEditPage = !!props?.plantDetails;
   const editPlantId = props?.plantDetails?.id;
