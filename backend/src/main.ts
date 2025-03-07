@@ -7,8 +7,10 @@ async function bootstrap() {
 
   // CORS を設定
   app.enableCors({
-    // origin: 'http://localhost:58937',
-    origin: 'http://localhost:3001',
+    origin: [
+      'http://localhost:3001',
+      'https://my-plant-app-frontend.onrender.com',
+    ],
     methods: 'GET,POST,PUT,DELETE,PATCH',
   });
 
