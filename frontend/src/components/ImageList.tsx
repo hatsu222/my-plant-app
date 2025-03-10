@@ -93,7 +93,7 @@ const ImageList = (props?: any) => {
           </>
         ) : (
           <>
-            <img
+            {/* <img
               src={shiborikomi}
               alt=""
               style={{
@@ -109,7 +109,7 @@ const ImageList = (props?: any) => {
                 maxHeight: "17px",
                 marginLeft: "15px",
               }}
-            />
+            /> */}
           </>
         )}
       </div>
