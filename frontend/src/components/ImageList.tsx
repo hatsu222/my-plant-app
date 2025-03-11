@@ -5,6 +5,7 @@ import axios from "axios";
 import { AxiosError } from "axios";
 import { useNavigate } from "react-router-dom";
 import plantPlus2 from "../img/plantPlus2.png";
+// import { useLocation } from "react-router-dom";
 
 interface PlantImgData {
   data: {
@@ -61,10 +62,14 @@ const ImageList = (props?: any) => {
       state: { fromWantPlantPage: true },
     });
   };
-
   const clickWantPlantPlus = () => {
     navigate("/increase-plants", {
       state: { fromWantPlantPage: true },
+    });
+  };
+  const clickFavoritePlant = (plantId: number) => {
+    navigate(`/details/${plantId}`, {
+      state: { fromFavoritePlantPage: true },
     });
   };
 
@@ -145,7 +150,7 @@ const ImageList = (props?: any) => {
                   }}
                   src={`data:image/jpeg;base64,${imgData.base64_data}`}
                   alt=""
-                  onClick={() => clickPlant(imgData.plant_id)}
+                  onClick={() => clickFavoritePlant(imgData.plant_id)}
                 />
               </div>
             ))

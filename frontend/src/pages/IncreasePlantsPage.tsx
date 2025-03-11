@@ -23,7 +23,11 @@ const IncreasePlantsPage = () => {
     setVisible(false);
   };
   const handleOk = () => {
-    navigate("/increase-plants-home");
+    if (isFromWantPlantsPage) {
+      navigate("/want");
+    } else {
+      navigate("/increase-plants-home");
+    }
   };
 
   return (

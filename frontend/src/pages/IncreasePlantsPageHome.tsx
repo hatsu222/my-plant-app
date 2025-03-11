@@ -22,7 +22,9 @@ const IncreasePlantsPageHome = () => {
   };
 
   const navigateWantList = () => {
-    navigate("/want");
+    navigate("/want", {
+      state: { fromIncreasePlantPage: true },
+    });
   };
 
   return (

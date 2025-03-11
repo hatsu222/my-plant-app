@@ -50,7 +50,7 @@ const PlantPurchase = (props: any) => {
           type="date"
           onChange={(date) => props.handleValueChange("purchaseDate", date)}
           placeholder={todayDate}
-          value={plantDetails?.purchaseDate || null}
+          defaultValue={plantDetails?.purchaseDate || null}
           style={{
             marginTop: "2px",
             borderColor: "#dedede",

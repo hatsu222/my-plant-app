@@ -16,13 +16,17 @@ const PlantDetailsPage = () => {
   const [sameFamilyPlants, setSameFamilyPlants] = useState<any>([]);
 
   const location = useLocation();
-  //欲しい植物の詳細か、持っている植物の詳細かを判別
+  //欲しい植物の詳細か、お気に入り植物の詳細か、持っている植物の詳細かを判別
   const isFromWantPlantsPage = location.state?.fromWantPlantPage ? true : false;
+  const isFromFavoritePlantsPage = location.state?.fromFavoritePlantPage
+    ? true
+    : false;
+
   const navigate = useNavigate();
   const opacityProps = {
-    happa: isFromWantPlantsPage ? false : true,
+    happa: isFromWantPlantsPage || isFromFavoritePlantsPage ? false : true,
     plant2: false,
-    men: isFromWantPlantsPage ? true : false,
+    men: isFromWantPlantsPage || isFromFavoritePlantsPage ? true : false,
   };
 
   useEffect(() => {
