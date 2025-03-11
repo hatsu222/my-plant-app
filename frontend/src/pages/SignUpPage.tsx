@@ -23,6 +23,7 @@ const ListofPlantsPage = () => {
 
   const navigate = useNavigate();
 
+  //新規登録処理
   const signUp = async () => {
     try {
       const response = await axios.post(`${apiUrl}/users/signup`, {

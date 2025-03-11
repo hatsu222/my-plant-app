@@ -19,6 +19,7 @@ interface PlantImgData {
 const ImageList = (props?: any) => {
   const apiUrl = process.env.REACT_APP_API_URL;
 
+  //お気に入り植物リストか、欲しい植物リストかを判別
   const isFavoritePlantPage = props?.favoritePage ? true : false;
   const isWantListPlantPage = props?.wantListPage ? true : false;
 

@@ -4,7 +4,7 @@ import feature2 from "../../img/feature2.png";
 import "../../styles.css";
 
 const PlantFeature = (props: any) => {
-  //表示画面か編集画面か
+  //表示画面か編集画面かを判別
   const previewDetails = !!props.featureDetails;
 
   const [srcName, setSrcName] = useState<string[]>([

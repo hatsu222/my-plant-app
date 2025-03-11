@@ -16,8 +16,10 @@ const IncreasePlants = (props?: any) => {
   const isEditPage = !!props?.plantDetails;
   const editPlantId = props?.plantDetails?.id;
 
+  //欲しい植物を追加するのか、所持している植物を追加するのかを判別
   const isWantPlantPage = props?.isWantPlantPage;
   const isFromWantPlantsPage = props?.isFromWantPlantsPage ? true : false;
+
   const [plantInfo, setPlantInfo] = useState<{
     id: number | null;
     popularName: string;

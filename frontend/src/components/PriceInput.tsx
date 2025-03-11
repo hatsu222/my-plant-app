@@ -2,13 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Input } from "@douyinfe/semi-ui";
 const PriceInput = (props: any) => {
   const plantDetails = props?.plantDetails;
-  // console.log("plantDetails.price", plantDetails.price);
-  // useEffect(() => {
-  //   if (plantDetails) {
-  //     setAmount(plantDetails.price || null);
-  //   }
-  // }, [plantDetails]);
-
   const [amount, setAmount] = useState<number>(1000);
 
   const handleOnChange = (e: any) => {

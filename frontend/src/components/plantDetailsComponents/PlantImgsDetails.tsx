@@ -41,6 +41,7 @@ const PlantImgsDetails = (props: any) => {
     }
   };
 
+  //DBの特定の植物をお気に入り植物として更新する処理
   const favoritePlant = async (favorite: boolean) => {
     try {
       const response = await axios.patch(

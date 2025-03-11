@@ -27,7 +27,7 @@ const MyPage = () => {
     userName: string;
     myImgBase64Data: string | null;
   } | null>(null);
-  console.log("userInfo", userInfo);
+
   const [visible, setVisible] = useState<boolean>(false);
   const [logoutVisible, setLogoutVisible] = useState<boolean>(false);
 
@@ -42,7 +42,6 @@ const MyPage = () => {
     const fetchData = async () => {
       try {
         const token = localStorage.getItem("access_token");
-        console.log("token", token);
         const userResponse = await axios.get(`${apiUrl}/users/get-user-info`, {
           headers: {
             Authorization: `Bearer ${token}`,

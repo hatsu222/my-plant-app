@@ -40,7 +40,6 @@ export class UserService {
   }
 
   async getUserInfo(userId: number): Promise<User | null> {
-    console.log('userId', userId);
     const userInfo = await this.userRepository.findOne({
       where: { id: userId },
     });

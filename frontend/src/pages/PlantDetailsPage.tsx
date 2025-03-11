@@ -16,24 +16,14 @@ const PlantDetailsPage = () => {
   const [sameFamilyPlants, setSameFamilyPlants] = useState<any>([]);
 
   const location = useLocation();
+  //欲しい植物の詳細か、持っている植物の詳細かを判別
   const isFromWantPlantsPage = location.state?.fromWantPlantPage ? true : false;
-  //   const [visible, setVisible] = useState<boolean>(false);
-  //   const navigate = useNavigate();
   const navigate = useNavigate();
   const opacityProps = {
     happa: isFromWantPlantsPage ? false : true,
     plant2: false,
     men: isFromWantPlantsPage ? true : false,
   };
-  //   const clickReturn = () => {
-  //     setVisible(true);
-  //   };
-  //   const handleCancel = () => {
-  //     setVisible(false);
-  //   };
-  //   const handleOk = () => {
-  //     navigate("/increase-plants-home");
-  //   };
 
   useEffect(() => {
     const fetchData = async () => {

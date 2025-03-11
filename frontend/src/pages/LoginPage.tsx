@@ -8,7 +8,6 @@ import { AxiosError } from "axios";
 
 const LoginPage = () => {
   const apiUrl = process.env.REACT_APP_API_URL;
-  console.log("apiUrl", apiUrl);
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
 

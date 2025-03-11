@@ -13,8 +13,6 @@ const EditPlantPage = () => {
     location.state?.plantDetails || location.state?.wantPlantDetails;
   const isFromWantPlantsPage = location.state?.fromWantPlantPage ? true : false;
   const wantToList = location.state?.wantToList ? true : false;
-  console.log("isFromWantPlantsPageえぢ", isFromWantPlantsPage);
-  console.log("wantToList", wantToList);
   const [visible, setVisible] = useState<boolean>(false);
   const navigate = useNavigate();
 

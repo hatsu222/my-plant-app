@@ -7,9 +7,9 @@ import PriceInput from "../PriceInput";
 
 const PlantPurchase = (props: any) => {
   const today = new Date();
-  const year = today.getFullYear(); // 年を取得
-  const month = String(today.getMonth() + 1).padStart(2, "0"); // 月を取得 (0から始まるので+1)
-  const day = String(today.getDate()).padStart(2, "0"); // 日を取得
+  const year = today.getFullYear();
+  const month = String(today.getMonth() + 1).padStart(2, "0");
+  const day = String(today.getDate()).padStart(2, "0");
   const todayDate = `${year}-${month}-${day}`;
 
   const plantDetails = props?.plantDetails;
