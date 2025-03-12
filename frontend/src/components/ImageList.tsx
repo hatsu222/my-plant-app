@@ -5,16 +5,17 @@ import axios from "axios";
 import { AxiosError } from "axios";
 import { useNavigate } from "react-router-dom";
 import plantPlus2 from "../img/plantPlus2.png";
-// import { useLocation } from "react-router-dom";
+import SortModal from "./modal/SortModal";
+import { useParams } from "react-router-dom";
 
 interface PlantImgData {
-  data: {
-    file_name: string;
-    base64_data: string;
-    plant_id: number;
-    favorite: boolean;
-    possessed: boolean;
-  }[];
+  file_name: string;
+  base64_data: string;
+  plant_id: number;
+  favorite: boolean;
+  possessed: boolean;
+  price: number;
+  purchase_date: Date;
 }
 
 const ImageList = (props?: any) => {
@@ -24,7 +25,12 @@ const ImageList = (props?: any) => {
   const isFavoritePlantPage = props?.favoritePage ? true : false;
   const isWantListPlantPage = props?.wantListPage ? true : false;
 
-  const [plantImgData, setPlantImgData] = useState<PlantImgData | null>(null);
+  const [plantImgData, setPlantImgData] = useState<PlantImgData[] | []>([]);
+  const [sortedPlantImgData, setSortedPlantImgData] = useState<
+    PlantImgData[] | []
+  >([]);
+
+  //植物リストデータをとってくる処理
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -34,7 +40,7 @@ const ImageList = (props?: any) => {
             Authorization: `Bearer ${token}`,
           },
         });
-        setPlantImgData(response.data);
+        setPlantImgData(response.data.data);
       } catch (error) {
         const axiosError = error as AxiosError;
         console.error(axiosError);
@@ -44,18 +50,77 @@ const ImageList = (props?: any) => {
   }, []);
 
   const navigate = useNavigate();
-  const favoritePlantsImgData = plantImgData?.data.filter(
+  const favoritePlantsImgData = plantImgData?.filter(
     (plant) => plant.favorite === true
   );
-  const wantPlantsImgData = plantImgData?.data.filter(
+  const wantPlantsImgData = plantImgData?.filter(
     (plant) => plant.possessed === false
   );
-  const ListOfPlantsImgData = plantImgData?.data.filter(
+
+  const possessedImgData = plantImgData.filter(
     (plant) => plant.possessed === true
   );
 
+  //ソート設定済みの場合はソート順で表示
+  const [sortType, setSortType] = useState<{
+    sortName: string;
+    sortNumber: number;
+  } | null>(null);
+
+  const { sortName, sortNumber } = useParams();
+
+  useEffect(() => {
+    setSortedPlantImgData(possessedImgData);
+    if (!!sortName && !!sortNumber) {
+      setSortType({ sortName: sortName, sortNumber: Number(sortNumber) });
+    }
+  }, [plantImgData]);
+
+  //ソート機能
+  useEffect(() => {
+    setSortModalVisible(false);
+    const possessedImgData = plantImgData.filter(
+      (plant) => plant.possessed === true
+    );
+    let updateSortedPlantImgData;
+    if (sortType?.sortName === "price") {
+      if (sortType?.sortNumber === 1) {
+        updateSortedPlantImgData = possessedImgData?.sort(
+          (a, b) => a.price - b.price
+        );
+      } else {
+        updateSortedPlantImgData = possessedImgData?.sort(
+          (a, b) => b.price - a.price
+        );
+      }
+    } else if (sortType?.sortName === "purchaseDate") {
+      if (sortType?.sortNumber === 1) {
+        updateSortedPlantImgData = possessedImgData?.sort((a, b) => {
+          const dateA = new Date(a.purchase_date);
+          const dateB = new Date(b.purchase_date);
+          return dateB.getTime() - dateA.getTime();
+        });
+      } else {
+        updateSortedPlantImgData = possessedImgData?.sort((a, b) => {
+          const dateA = new Date(a.purchase_date);
+          const dateB = new Date(b.purchase_date);
+          return dateA.getTime() - dateB.getTime();
+        });
+      }
+    }
+    if (updateSortedPlantImgData) {
+      setSortedPlantImgData(updateSortedPlantImgData);
+    }
+  }, [sortType, plantImgData]);
+
   const clickPlant = (plantId: number) => {
-    navigate(`/details/${plantId}`);
+    if (sortType) {
+      const sortName = sortType.sortName;
+      const sortNumber = sortType.sortNumber;
+      navigate(`/details/${plantId}/${sortName}/${sortNumber}`);
+    } else {
+      navigate(`/details/${plantId}`);
+    }
   };
   const clickWantPlant = (plantId: number) => {
     navigate(`/details/${plantId}`, {
@@ -73,8 +138,18 @@ const ImageList = (props?: any) => {
     });
   };
 
+  const [sortModalVisible, setSortModalVisible] = useState<boolean>(false);
+  const viewSortModal = () => {
+    setSortModalVisible(true);
+  };
+
   return (
     <div>
+      <SortModal
+        sortModalVisible={sortModalVisible}
+        setSortModalVisible={setSortModalVisible}
+        setSortType={setSortType}
+      />
       <div
         style={{
           display: "flex",
@@ -107,6 +182,7 @@ const ImageList = (props?: any) => {
                 maxHeight: "17px",
               }}
             />
+                        */}
             <img
               src={sort}
               alt=""
@@ -115,7 +191,8 @@ const ImageList = (props?: any) => {
                 maxHeight: "17px",
                 marginLeft: "15px",
               }}
-            /> */}
+              onClick={viewSortModal}
+            />
           </>
         )}
       </div>
@@ -180,7 +257,7 @@ const ImageList = (props?: any) => {
                 />
               </div>
             ))
-          : ListOfPlantsImgData?.map((imgData) => (
+          : sortedPlantImgData?.map((imgData) => (
               <div
                 key={imgData.plant_id}
                 style={{

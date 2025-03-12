@@ -26,9 +26,17 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/list" element={<ListofPlantsPage />} />
+        <Route
+          path="/list/:sortName/:sortNumber"
+          element={<ListofPlantsPage />}
+        />
         <Route path="/favorite" element={<FavoritePlantsPage />} />
         <Route path="/want" element={<PlantIWantPage />} />
         <Route path="/details/:plantId" element={<PlantDetailsPage />} />
+        <Route
+          path="/details/:plantId/:sortName/:sortNumber"
+          element={<PlantDetailsPage />}
+        />
         <Route path="/my-page" element={<MyPage />} />
         <Route
           path="/increase-plants-home"

@@ -68,8 +68,26 @@ const PlantDetailsPage = () => {
       },
     });
   };
+
+  const { sortName, sortNumber } = useParams();
+  const clickReturn = () => {
+    if (isFromWantPlantsPage) {
+      navigate("/want");
+    } else if (isFromFavoritePlantsPage) {
+      navigate("/favorite");
+    } else {
+      if (sortName && sortNumber) {
+        navigate(`/list/${sortName}/${sortNumber}`);
+      } else {
+        navigate("/list");
+      }
+    }
+  };
   return (
     <div>
+      <p className="increase-page-modoru-button" onClick={clickReturn}>
+        戻る
+      </p>
       <h1 className="pageTitle" style={{ marginTop: "20px" }}>
         {isFromWantPlantsPage ? "欲しい植物" : "この植物について"}
       </h1>

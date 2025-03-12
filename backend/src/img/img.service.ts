@@ -36,7 +36,7 @@ export class ImgService {
 
   async getPlantImg(userId: number): Promise<any> {
     const query = `
-     SELECT file_name,base64_data,plant_id,plant.favorite,possessed
+     SELECT file_name,base64_data,plant_id,plant.favorite,possessed,plant.price,plant.purchase_date
      FROM img
     JOIN plant ON plant.id = img.plant_id
      WHERE (img.plant_id,img.uploaded_at)IN(
