@@ -2,7 +2,9 @@ import React, { useState, useEffect } from "react";
 import { Input } from "@douyinfe/semi-ui";
 const PriceInput = (props: any) => {
   const plantDetails = props?.plantDetails;
-  const [amount, setAmount] = useState<number>(1000);
+  const [amount, setAmount] = useState<number>(
+    plantDetails?.price ? plantDetails.price : 1000
+  );
 
   const handleOnChange = (e: any) => {
     setAmount(e.target.value);
@@ -32,7 +34,10 @@ const PriceInput = (props: any) => {
           height: "45px",
           lineHeight: "42px",
         }}
-        value={plantDetails?.price ? `¥${plantDetails.price}` : `¥${amount}`}
+        defaultValue={
+          plantDetails?.price ? `¥${plantDetails.price}` : `¥${amount}`
+        }
+        value={`¥${amount}`}
         type="text"
       />
       <input
@@ -40,7 +45,7 @@ const PriceInput = (props: any) => {
         min="0"
         max="30000"
         step="100"
-        value={plantDetails?.price ? plantDetails.price : amount}
+        defaultValue={plantDetails?.price ? plantDetails.price : amount}
         onChange={handleOnChange}
         style={{
           color: "red",
