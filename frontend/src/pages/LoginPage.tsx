@@ -33,6 +33,7 @@ const LoginPage = () => {
       localStorage.setItem("access_token", userInfo.data.access_token);
       navigate("/list");
     } catch (error) {
+     console.error("login error:", error);
       const axiosError = error as AxiosError;
       if (axiosError.response && axiosError.response.status === 401) {
         Toast.error("ユーザー名またはパスワードが正しくありません");
